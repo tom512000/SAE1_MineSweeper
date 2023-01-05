@@ -30,6 +30,12 @@ def construireCoordonnee(li: int, co: int) -> tuple:
 
 
 def getLigneCoordonnee(coord: tuple) -> int:
-    if type(coord[0]) != int:
+    if type(coord) != tuple:
         raise TypeError(f"getLigneCoordonnee : Le paramètre n’est pas une coordonnée")
     return coord[0]
+
+
+def getColonneCoordonnee(coord: tuple) -> int:
+    if type(coord) != tuple:
+        raise TypeError(f"getColonneCoordonnee : Le paramètre n’est pas une coordonnée")
+    return coord[1]

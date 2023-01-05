@@ -27,3 +27,9 @@ def construireCoordonnee(li: int, co: int) -> tuple:
     if (li < 0) or (co < 0):
         raise ValueError(f"construireCoordonnee : Le numéro de ligne ({li}) ou de colonne ({co}) ne sont pas positifs")
     return li, co
+
+
+def getLigneCoordonnee(coord: tuple) -> int:
+    if type(coord[0]) != int:
+        raise TypeError(f"getLigneCoordonnee : Le paramètre n’est pas une coordonnée")
+    return coord[0]

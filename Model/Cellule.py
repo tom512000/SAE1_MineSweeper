@@ -65,3 +65,12 @@ def setVisibleCellule(cell: dict, visibilite: bool) -> None:
         raise TypeError("setVisibleCellule : Le second paramètre n’est pas un booléen.")
     cell[const.VISIBLE] = visibilite
     return None
+
+
+def contientMineCellule(cell: dict) -> bool:
+    if type(cell) != dict:
+        raise TypeError("contientMineCellule : Le paramètre n’est pas une cellule.")
+    res = False
+    if cell[const.CONTENU] == const.ID_MINE:
+        res = True
+    return res

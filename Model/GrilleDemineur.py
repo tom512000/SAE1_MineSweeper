@@ -30,7 +30,7 @@ def type_grille_demineur(grille: list) -> bool:
     if nc == 0:
         return False
     return next(filterfalse(lambda line: type(line) == list and len(line) == nc
-                            and next(filterfalse(type_cellule, line), True) is True, grille), True) is True
+                                         and next(filterfalse(type_cellule, line), True) is True, grille), True) is True
     # Tableau régulier
     # nc = None
     # for line in grille:
@@ -55,10 +55,10 @@ def type_grille_demineur(grille: list) -> bool:
 def construireGrilleDemineur(nbl: int, nbc: int) -> list:
     if (nbl <= 0) or (nbc <= 0):
         raise ValueError(f"construireGrilleDemineur : Le nombre de lignes ({nbl}) ou de colonnes ({nbc}) est négatif "
-                          "ou nul.")
+                         "ou nul.")
     if (type(nbl) != int) or (type(nbc) != int):
         raise TypeError(f"construireGrilleDemineur : Le nombre de lignes ({nbl}) ou de colonnes ({nbc}) n’est pas un "
-                         f"entier.")
+                        f"entier.")
     liste = []
     for i in range(nbl):
         ligne = []
@@ -66,3 +66,9 @@ def construireGrilleDemineur(nbl: int, nbc: int) -> list:
             ligne += [construiteCellule()]
         liste += [ligne]
     return liste
+
+
+def getNbLignesGrilleDemineur(grille: list) -> int:
+    if not type_grille_demineur(grille):
+        raise TypeError("getNbLignesGrilleDemineur : Le paramètre n’est pas une grille.")
+    return len(grille)

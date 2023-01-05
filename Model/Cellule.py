@@ -39,3 +39,9 @@ def getContenuCellule(cell: dict) -> int:
     if type(cell) != dict:
         raise TypeError("getContenuCellule : Le paramètre n’est pas une cellule.")
     return cell[const.CONTENU]
+
+
+def isVisibleCellule(cell: dict) -> int:
+    if type(cell) != dict:
+        raise TypeError("isVisibleCellule : Le paramètre n’est pas une cellule.")
+    return cell[const.VISIBLE]

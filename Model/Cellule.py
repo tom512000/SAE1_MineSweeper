@@ -33,3 +33,9 @@ def construiteCellule(entier: int = 0, booleen: bool = False) -> dict:
     if type(booleen) != bool:
         raise TypeError(f"construireCellule : le second paramètre ({booleen}) n’est pas un booléen")
     return {const.CONTENU: entier, const.VISIBLE: booleen}
+
+
+def getContenuCellule(cell: dict) -> int:
+    if type(cell) != dict:
+        raise TypeError("getContenuCellule : Le paramètre n’est pas une cellule.")
+    return cell[const.CONTENU]

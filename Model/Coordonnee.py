@@ -2,6 +2,7 @@
 
 import const
 
+
 # Définition des coordonnées (ligne, colonne)
 
 
@@ -16,6 +17,13 @@ def type_coordonnee(coord: tuple) -> bool:
     :return: `True` si le paramètre correspond à une coordonnée, `False` sinon.
     """
     return type(coord) == tuple and len(coord) == 2 and type(coord[0]) == int and type(coord[1]) == int \
-        and coord[0] >= 0 and coord[1] >= 0
+           and coord[0] >= 0 and coord[1] >= 0
 
 
+def construireCoordonnee(li: int, co: int) -> tuple:
+    if (type(li) != int) or (type(co) != int):
+        raise TypeError(f"construireCoordonnee : Le numéro de ligne {type(li)} ou le numéro de colonne {type(co)} "
+                         f"ne sont pas des entiers")
+    if (li < 0) or (co < 0):
+        raise ValueError(f"construireCoordonnee : Le numéro de ligne ({li}) ou de colonne ({co}) ne sont pas positifs")
+    return li, co

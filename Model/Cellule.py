@@ -29,9 +29,9 @@ def isContenuCorrect(entier: int) -> bool:
 
 def construiteCellule(entier: int = 0, booleen: bool = False) -> dict:
     if not isContenuCorrect(entier):
-        raise ValueError(f"construireCellule : le contenu {entier} n’est pas correct")
+        raise ValueError(f"construireCellule : le contenu {entier} n’est pas correct.")
     if type(booleen) != bool:
-        raise TypeError(f"construireCellule : le second paramètre ({booleen}) n’est pas un booléen")
+        raise TypeError(f"construireCellule : le second paramètre ({booleen}) n’est pas un booléen.")
     return {const.CONTENU: entier, const.VISIBLE: booleen}
 
 
@@ -45,3 +45,14 @@ def isVisibleCellule(cell: dict) -> int:
     if type(cell) != dict:
         raise TypeError("isVisibleCellule : Le paramètre n’est pas une cellule.")
     return cell[const.VISIBLE]
+
+
+def setContenuCellule(cell: dict, contenu: int) -> None:
+    if not isContenuCorrect(contenu):
+        raise ValueError(f"setContenuCellule : la valeur du contenu ({contenu}) n’est pas correcte.")
+    if type(cell) != dict:
+        raise TypeError("setContenuCellule : Le paramètre n’est pas une cellule.")
+    if type(contenu) != int:
+        raise TypeError("setContenuCellule : Le second paramètre n’est pas un entier.")
+    cell[const.CONTENU] = contenu
+    return None

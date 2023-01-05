@@ -36,13 +36,13 @@ def construiteCellule(entier: int = 0, booleen: bool = False) -> dict:
 
 
 def getContenuCellule(cell: dict) -> int:
-    if type(cell) != dict:
+    if not type_cellule(cell):
         raise TypeError("getContenuCellule : Le paramètre n’est pas une cellule.")
     return cell[const.CONTENU]
 
 
 def isVisibleCellule(cell: dict) -> int:
-    if type(cell) != dict:
+    if not type_cellule(cell):
         raise TypeError("isVisibleCellule : Le paramètre n’est pas une cellule.")
     return cell[const.VISIBLE]
 
@@ -50,7 +50,7 @@ def isVisibleCellule(cell: dict) -> int:
 def setContenuCellule(cell: dict, contenu: int) -> None:
     if not isContenuCorrect(contenu):
         raise ValueError(f"setContenuCellule : la valeur du contenu ({contenu}) n’est pas correcte.")
-    if type(cell) != dict:
+    if not type_cellule(cell):
         raise TypeError("setContenuCellule : Le premier paramètre n’est pas une cellule.")
     if type(contenu) != int:
         raise TypeError("setContenuCellule : Le second paramètre n’est pas un entier.")
@@ -59,7 +59,7 @@ def setContenuCellule(cell: dict, contenu: int) -> None:
 
 
 def setVisibleCellule(cell: dict, visibilite: bool) -> None:
-    if type(cell) != dict:
+    if not type_cellule(cell):
         raise TypeError("setVisibleCellule : Le premier paramètre n’est pas une cellule.")
     if type(visibilite) != int:
         raise TypeError("setVisibleCellule : Le second paramètre n’est pas un booléen.")
@@ -68,7 +68,7 @@ def setVisibleCellule(cell: dict, visibilite: bool) -> None:
 
 
 def contientMineCellule(cell: dict) -> bool:
-    if type(cell) != dict:
+    if not type_cellule(cell):
         raise TypeError("contientMineCellule : Le paramètre n’est pas une cellule.")
     res = False
     if cell[const.CONTENU] == const.ID_MINE:

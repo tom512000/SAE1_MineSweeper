@@ -51,8 +51,17 @@ def setContenuCellule(cell: dict, contenu: int) -> None:
     if not isContenuCorrect(contenu):
         raise ValueError(f"setContenuCellule : la valeur du contenu ({contenu}) n’est pas correcte.")
     if type(cell) != dict:
-        raise TypeError("setContenuCellule : Le paramètre n’est pas une cellule.")
+        raise TypeError("setContenuCellule : Le premier paramètre n’est pas une cellule.")
     if type(contenu) != int:
         raise TypeError("setContenuCellule : Le second paramètre n’est pas un entier.")
     cell[const.CONTENU] = contenu
+    return None
+
+
+def setVisibleCellule(cell: dict, visibilite: bool) -> None:
+    if type(cell) != dict:
+        raise TypeError("setVisibleCellule : Le premier paramètre n’est pas une cellule.")
+    if type(visibilite) != int:
+        raise TypeError("setVisibleCellule : Le second paramètre n’est pas un booléen.")
+    cell[const.VISIBLE] = visibilite
     return None

@@ -95,3 +95,7 @@ def getCelluleGrilleDemineur(grille: list, coord: tuple) -> dict:
     if not isCoordonneeCorrecte(grille, coord):
         raise IndexError("getCelluleGrilleDemineur : coordonnée non contenue dans la grille.")
     return grille[coord[0]][coord[1]]
+
+
+def getContenuGrilleDemineur(grille: list, coord: tuple) -> int:
+    return getContenuCellule(getCelluleGrilleDemineur(grille, coord))

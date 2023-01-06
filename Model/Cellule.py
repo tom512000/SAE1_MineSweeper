@@ -22,7 +22,7 @@ def type_cellule(cell: dict) -> bool:
 
 def isContenuCorrect(entier: int) -> bool:
     res = False
-    if type(entier) == int and (entier >= 0 and entier <= 8) or entier == const.ID_MINE:
+    if (type(entier) == int and (0 <= entier <= 8)) or entier == const.ID_MINE:
         res = True
     return res
 
@@ -48,12 +48,12 @@ def isVisibleCellule(cell: dict) -> int:
 
 
 def setContenuCellule(cell: dict, contenu: int) -> None:
-    if not isContenuCorrect(contenu):
-        raise ValueError(f"setContenuCellule : la valeur du contenu ({contenu}) n’est pas correcte.")
     if not type_cellule(cell):
         raise TypeError("setContenuCellule : Le premier paramètre n’est pas une cellule.")
     if type(contenu) != int:
         raise TypeError("setContenuCellule : Le second paramètre n’est pas un entier.")
+    if not isContenuCorrect(contenu):
+        raise ValueError(f"setContenuCellule : la valeur du contenu ({contenu}) n’est pas correcte.")
     cell[const.CONTENU] = contenu
     return None
 

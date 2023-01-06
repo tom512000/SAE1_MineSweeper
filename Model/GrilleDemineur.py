@@ -99,3 +99,8 @@ def getCelluleGrilleDemineur(grille: list, coord: tuple) -> dict:
 
 def getContenuGrilleDemineur(grille: list, coord: tuple) -> int:
     return getContenuCellule(getCelluleGrilleDemineur(grille, coord))
+
+
+def setContenuGrilleDemineur(grille: list, coord: tuple, contenu: int) -> None:
+    setContenuCellule(getCelluleGrilleDemineur(grille, coord), contenu)
+    return None

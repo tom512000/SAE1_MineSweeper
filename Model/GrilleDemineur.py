@@ -115,3 +115,10 @@ def setVisibleGrilleDemineur(grille: list, coord: tuple, visibilite: bool) -> No
         raise TypeError("setVisibleGrilleDemineur : Le troisième paramètre n’est pas un booléen.")
     setVisibleCellule(getCelluleGrilleDemineur(grille, coord), visibilite)
     return None
+
+
+def contientMineGrilleDemineur(grille: list, coord: tuple) -> bool:
+    res = False
+    if getCelluleGrilleDemineur(grille, coord)[const.CONTENU] == const.ID_MINE:
+        res = True
+    return res

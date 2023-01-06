@@ -87,3 +87,11 @@ def isCoordonneeCorrecte(grille: list, coord: tuple) -> bool:
     if ((coord[0] < len(grille)) and (coord[0] >= 0)) and ((coord[1] < len(grille[0])) and (coord[1] >= 0)):
         res = True
     return res
+
+
+def getCelluleGrilleDemineur(grille: list, coord: tuple) -> dict:
+    if (not type_grille_demineur(grille)) or (not type_coordonnee(coord)):
+        raise TypeError("getCelluleGrilleDemineur : un des paramètres n’est pas du bon type.")
+    if not isCoordonneeCorrecte(grille, coord):
+        raise IndexError("getCelluleGrilleDemineur : coordonnée non contenue dans la grille.")
+    return grille[coord[0]][coord[1]]

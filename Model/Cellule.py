@@ -41,7 +41,7 @@ def getContenuCellule(cell: dict) -> int:
     return cell[const.CONTENU]
 
 
-def isVisibleCellule(cell: dict) -> int:
+def isVisibleCellule(cell: dict) -> bool:
     if not type_cellule(cell):
         raise TypeError("isVisibleCellule : Le paramètre n’est pas une cellule.")
     return cell[const.VISIBLE]
@@ -61,7 +61,7 @@ def setContenuCellule(cell: dict, contenu: int) -> None:
 def setVisibleCellule(cell: dict, visibilite: bool) -> None:
     if not type_cellule(cell):
         raise TypeError("setVisibleCellule : Le premier paramètre n’est pas une cellule.")
-    if type(visibilite) != int:
+    if type(visibilite) != bool:
         raise TypeError("setVisibleCellule : Le second paramètre n’est pas un booléen.")
     cell[const.VISIBLE] = visibilite
     return None

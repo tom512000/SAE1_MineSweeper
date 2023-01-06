@@ -104,3 +104,7 @@ def getContenuGrilleDemineur(grille: list, coord: tuple) -> int:
 def setContenuGrilleDemineur(grille: list, coord: tuple, contenu: int) -> None:
     setContenuCellule(getCelluleGrilleDemineur(grille, coord), contenu)
     return None
+
+
+def isVisibleGrilleDemineur(grille: list, coord: tuple) -> bool:
+    return isVisibleCellule(getCelluleGrilleDemineur(grille, coord))

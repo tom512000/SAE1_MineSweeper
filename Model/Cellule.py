@@ -27,12 +27,12 @@ def isContenuCorrect(entier: int) -> bool:
     return res
 
 
-def construiteCellule(entier: int = 0, booleen: bool = False) -> dict:
+def construireCellule(entier: int = 0, visible: bool = False) -> dict:
     if not isContenuCorrect(entier):
         raise ValueError(f"construireCellule : le contenu {entier} n’est pas correct.")
-    if type(booleen) != bool:
-        raise TypeError(f"construireCellule : le second paramètre ({booleen}) n’est pas un booléen.")
-    return {const.CONTENU: entier, const.VISIBLE: booleen}
+    if type(visible) != bool:
+        raise TypeError(f"construireCellule : le second paramètre ({visible}) n’est pas un booléen.")
+    return {const.CONTENU: entier, const.VISIBLE: visible, const.ANNOTATION: None}
 
 
 def getContenuCellule(cell: dict) -> int:

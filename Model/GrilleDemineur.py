@@ -63,7 +63,7 @@ def construireGrilleDemineur(nbl: int, nbc: int) -> list:
     for i in range(nbl):
         ligne = []
         for j in range(nbc):
-            ligne += [construiteCellule()]
+            ligne += [construireCellule()]
         liste += [ligne]
     return liste
 

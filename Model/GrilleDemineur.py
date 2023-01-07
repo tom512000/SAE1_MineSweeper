@@ -122,3 +122,17 @@ def contientMineGrilleDemineur(grille: list, coord: tuple) -> bool:
     if getCelluleGrilleDemineur(grille, coord)[const.CONTENU] == const.ID_MINE:
         res = True
     return res
+
+
+def getCoordonneeVoisinsGrilleDemineur(grille: list, coord: tuple) -> list:
+    if (not type_grille_demineur(grille)) or (not type_coordonnee(coord)):
+        raise TypeError("getCoordonneeVoisinsGrilleDemineur : un des paramètres n’est pas du bon type.")
+    if not isCoordonneeCorrecte(grille, coord):
+        raise IndexError("getCoordonneeVoisinsGrilleDemineur : la coordonnée n’est pas dans la grille.")
+    voisins = []
+    for i in range(coord[0] - 1, coord[0] + 2):
+        if (i >= 0) and (i < len(grille)):
+            for j in range(coord[1] - 1, coord[1] + 2):
+                if (j >= 0) and (j < len(grille[0])) and ((i, j) != coord):
+                    voisins += [(i, j)]
+    return voisins

@@ -16,6 +16,10 @@ def __contientMineCellule(cell: dict) -> bool:
 
 def __decouvrirGrilleDemineur(g: list, coord: tuple) -> list:
     print("Fonction decouvrirGrilleDemineur manquante.")
+    if "setVisibleGrilleDemineur" in globals():
+        setVisibleGrilleDemineur(g, coord, True)
+    else:
+        print("Fonction setVisibleGrilleDemineur manquante.")
     return [coord]
 
 

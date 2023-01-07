@@ -74,3 +74,10 @@ def contientMineCellule(cell: dict) -> bool:
     if cell[const.CONTENU] == const.ID_MINE:
         res = True
     return res
+
+
+def isAnnotationCorrecte(annotation: str) -> bool:
+    res = False
+    if annotation in (None, const.DOUTE, const.FLAG):
+        res = True
+    return res

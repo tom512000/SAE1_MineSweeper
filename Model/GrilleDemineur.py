@@ -136,3 +136,20 @@ def getCoordonneeVoisinsGrilleDemineur(grille: list, coord: tuple) -> list:
                 if (j >= 0) and (j < len(grille[0])) and ((i, j) != coord):
                     voisins += [(i, j)]
     return voisins
+
+
+def placerMinesGrilleDemineur(grille: list, nb: int, coord: tuple) -> None:
+    if (nb < 0) or (nb > (len(grille)*len(grille[0]))-1):
+        raise ValueError("placerMinesGrilleDemineur : Nombre de bombes à placer incorrect.")
+    if not isCoordonneeCorrecte(grille, coord):
+        raise IndexError("placerMinesGrilleDemineur : la coordonnée n’est pas dans la grille.")
+    for i in range(nb):
+        x = randint(0, len(grille) - 1)
+        y = randint(0, len(grille[0]) - 1)
+        cellule = (x, y)
+        while (cellule == coord) or (getContenuCellule(getCelluleGrilleDemineur(grille, cellule)) == const.ID_MINE):
+            x = randint(0, len(grille) - 1)
+            y = randint(0, len(grille[0]) - 1)
+            cellule = (x, y)
+        setContenuCellule(getCelluleGrilleDemineur(grille, cellule), const.ID_MINE)
+    return None

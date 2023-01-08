@@ -3,6 +3,7 @@ from Model.GrilleDemineur import *
 from random import randint, shuffle
 from copy import deepcopy
 
+
 scientific_modules_installed = True
 
 try:

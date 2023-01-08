@@ -139,7 +139,7 @@ def getCoordonneeVoisinsGrilleDemineur(grille: list, coord: tuple) -> list:
 
 
 def placerMinesGrilleDemineur(grille: list, nb: int, coord: tuple) -> None:
-    if (nb < 0) or (nb > (len(grille)*len(grille[0]))-1):
+    if (nb < 0) or (nb > (len(grille) * len(grille[0])) - 1):
         raise ValueError("placerMinesGrilleDemineur : Nombre de bombes à placer incorrect.")
     if not isCoordonneeCorrecte(grille, coord):
         raise IndexError("placerMinesGrilleDemineur : la coordonnée n’est pas dans la grille.")
@@ -191,3 +191,13 @@ def getMinesRestantesGrilleDemineur(grille: list) -> int:
             if getAnnotationGrilleDemineur(grille, (i, j)) == const.FLAG:
                 nb += 1
     return getNbMinesGrilleDemineur(grille) - nb
+
+
+def gagneGrilleDemineur(grille: list) -> bool:
+    res = True
+    for i in range(len(grille)):
+        for j in range(len(grille[i])):
+            if (not contientMineGrilleDemineur(grille, (i, j)) and not isVisibleGrilleDemineur(grille, (i, j))) or (
+                    (contientMineGrilleDemineur(grille, (i, j)) == True) and (isVisibleGrilleDemineur(grille, (i, j)) == True)):
+                res = False
+    return res

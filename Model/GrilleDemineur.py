@@ -198,7 +198,10 @@ def gagneGrilleDemineur(grille: list) -> bool:
     for i in range(len(grille)):
         for j in range(len(grille[i])):
             if (not contientMineGrilleDemineur(grille, (i, j)) and not isVisibleGrilleDemineur(grille, (i, j))) or (
-                    (contientMineGrilleDemineur(grille, (i, j)) == True) and (isVisibleGrilleDemineur(grille, (i, j)) == True)):
+                    (contientMineGrilleDemineur(grille, (i, j)) == True) and (isVisibleGrilleDemineur(grille, (i, j)
+                                                                                                      ) == True)) or (
+                    ((contientMineGrilleDemineur(grille, (i, j)) == True) and (not getAnnotationGrilleDemineur(grille, (
+                            i, j))) == const.FLAG)):
                 res = False
     return res
 
@@ -207,6 +210,7 @@ def perduGrilleDemineur(grille: list):
     res = False
     for i in range(len(grille)):
         for j in range(len(grille[i])):
-            if (contientMineGrilleDemineur(grille, (i, j)) == True) and (isVisibleGrilleDemineur(grille, (i, j)) == True):
+            if (contientMineGrilleDemineur(grille, (i, j)) == True) and (
+                    isVisibleGrilleDemineur(grille, (i, j)) == True):
                 res = True
     return res

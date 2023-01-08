@@ -103,3 +103,10 @@ def changeAnnotationCellule(cell: dict) -> None:
     elif cell[const.ANNOTATION] == const.DOUTE:
         cell[const.ANNOTATION] = None
     return None
+
+
+def reinitialiserCellule(cell: dict) -> None:
+    setContenuCellule(cell, 0)
+    setVisibleCellule(cell, False)
+    cell[const.ANNOTATION] = None
+    return None

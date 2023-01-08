@@ -214,3 +214,10 @@ def perduGrilleDemineur(grille: list):
                     isVisibleGrilleDemineur(grille, (i, j)) == True):
                 res = True
     return res
+
+
+def reinitialiserGrilleDemineur(grille: list) -> None:
+    for i in range(len(grille)):
+        for j in range(len(grille[i])):
+            reinitialiserCellule(grille[i][j])
+    return None

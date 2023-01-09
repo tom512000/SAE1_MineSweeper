@@ -246,13 +246,33 @@ def simplifierGrilleDemineur(grille: list, coord: tuple) -> set:
     voisins = getCoordonneeVoisinsGrilleDemineur(grille, coord)
     drapeaux = 0
     for coordvoisins in voisins:
-        if getAnnotationGrilleDemineur(grille, coordvoisins) == const.FLAG:
+        if (not isVisibleGrilleDemineur(grille, coordvoisins)) and (getAnnotationGrilleDemineur(grille, coordvoisins) == const.FLAG):
             drapeaux += 1
     if drapeaux == getContenuGrilleDemineur(grille, coord):
         coorddec = set()
         for coordvoisins in voisins:
-            if (not isVisibleGrilleDemineur(grille, coordvoisins)) and (getAnnotationGrilleDemineur(grille, coordvoisins) != const.FLAG):
+            if (not isVisibleGrilleDemineur(grille, coordvoisins)) and (
+                    getAnnotationGrilleDemineur(grille, coordvoisins) != const.FLAG):
                 setVisibleGrilleDemineur(grille, coordvoisins, True)
+                coorddec.add(coordvoisins)
+        return coorddec
+    else:
+        return set()
+
+
+def ajouterFlagsGrilleDemineur(grille: list, coord: tuple) -> set:
+    if not isVisibleGrilleDemineur(grille, coord):
+        return set()
+    cellnondec = 0
+    voisins = getCoordonneeVoisinsGrilleDemineur(grille, coord)
+    for coordvoisins in voisins:
+        if not isVisibleGrilleDemineur(grille, coordvoisins):
+            cellnondec += 1
+    if cellnondec == getContenuGrilleDemineur(grille, coord):
+        coorddec = set()
+        for coordvoisins in voisins:
+            if not isVisibleGrilleDemineur(grille, coordvoisins):
+                getCelluleGrilleDemineur(grille, coordvoisins)[const.ANNOTATION] = const.FLAG
                 coorddec.add(coordvoisins)
         return coorddec
     else:

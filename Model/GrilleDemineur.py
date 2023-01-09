@@ -277,3 +277,22 @@ def ajouterFlagsGrilleDemineur(grille: list, coord: tuple) -> set:
         return coorddec
     else:
         return set()
+
+
+def simplifierToutGrilleDemineur(grille: list) -> tuple:
+    simplifier = set()
+    ajouter = set()
+    for i in range(len(grille)):
+        for j in range(len(grille[i])):
+            grille1 = grille.copy()
+            simplifierGrilleDemineur(grille, (i, j))
+            grille2 = grille.copy()
+            if grille1 != grille2:
+                simplifier.add((i, j))
+
+            grille1 = grille.copy()
+            ajouterFlagsGrilleDemineur(grille, (i, j))
+            grille2 = grille.copy()
+            if grille1 != grille2:
+                ajouter.add((i, j))
+    return simplifier, ajouter

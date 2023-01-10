@@ -21,6 +21,13 @@ def type_coordonnee(coord: tuple) -> bool:
 
 
 def construireCoordonnee(li: int, co: int) -> tuple:
+    """
+    Cette fonction permet de renvoyer un tuple avec li et co
+
+    :param li: entier représentant le numéro de ligne
+    :param co: entier représentant le numéro de colonne
+    :return: tuple consituté du numéro de ligne et du numéro de colonne
+    """
     if (type(li) != int) or (type(co) != int):
         raise TypeError(f"construireCoordonnee : Le numéro de ligne {type(li)} ou le numéro de colonne {type(co)} "
                          f"ne sont pas des entiers.")
@@ -30,12 +37,24 @@ def construireCoordonnee(li: int, co: int) -> tuple:
 
 
 def getLigneCoordonnee(coord: tuple) -> int:
+    """
+    Cette fonction permet de retourner le numéro de ligne contenu dans la coordonnée passée en paramètre
+
+    :param coord: tuple composé d'un numéro de ligne et d'un numéro de colonne
+    :return: entier correspondant au numéro de ligne
+    """
     if not type_coordonnee(coord):
         raise TypeError(f"getLigneCoordonnee : Le paramètre n’est pas une coordonnée.")
     return coord[0]
 
 
 def getColonneCoordonnee(coord: tuple) -> int:
+    """
+    Cette fonction permet de retourner le numéro de colonne contenu dans la coordonnée passée en paramètre
+
+    :param coord: tuple composé d'un numéro de ligne et d'un numéro de colonne
+    :return: entier correspondant au entier correspondant au numéro de colonne
+    """
     if not type_coordonnee(coord):
         raise TypeError(f"getColonneCoordonnee : Le paramètre n’est pas une coordonnée.")
     return coord[1]

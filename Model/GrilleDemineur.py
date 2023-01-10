@@ -53,6 +53,13 @@ def type_grille_demineur(grille: list) -> bool:
 
 
 def construireGrilleDemineur(nbl: int, nbc: int) -> list:
+    """
+    Cette fonction permet de créer une grille sous forme de liste avec `nbl` ligne(s) et `nbc` colonne(s)
+
+    :param nbl: entier correspondant au nombre de lignes
+    :param nbc: entier correspondant au nombre de colonnes
+    :return: liste correspondant à une grille
+    """
     if (nbl <= 0) or (nbc <= 0):
         raise ValueError(f"construireGrilleDemineur : Le nombre de lignes ({nbl}) ou de colonnes ({nbc}) est négatif "
                          "ou nul.")
@@ -69,27 +76,54 @@ def construireGrilleDemineur(nbl: int, nbc: int) -> list:
 
 
 def getNbLignesGrilleDemineur(grille: list) -> int:
+    """
+    Cette fonction permet de retourner le nombre de lignes d'une grille
+
+    :param grille: liste correspondant à une grille
+    :return: entier correspondant au nombre de lignes
+    """
     if not type_grille_demineur(grille):
         raise TypeError("getNbLignesGrilleDemineur : Le paramètre n’est pas une grille.")
     return len(grille)
 
 
 def getNbColonnesGrilleDemineur(grille: list) -> int:
+    """
+    Cette fonction permet de retourner le nombre de colonnes d'une grille
+
+    :param grille: liste correspondant à une grille
+    :return: entier correspondant au nombre de colonnes
+    """
     if not type_grille_demineur(grille):
         raise TypeError("getNbColonnesGrilleDemineur : Le paramètre n’est pas une grille.")
     return len(grille[0])
 
 
 def isCoordonneeCorrecte(grille: list, coord: tuple) -> bool:
+    """
+    Cette fonction permet de vérifier si la coordonnée en paramètre est dans la grille ou non
+
+    :param grille: liste correspondant à une grille
+    :param coord: couple correspondant à une coordonnée
+    :return: `True` si la coordonnée est dans la grille, `False` sinon.
+    """
     if (not type_grille_demineur(grille)) or (not type_coordonnee(coord)):
         raise TypeError("isCoordonneeCorrecte : un des paramètres n’est pas du bon type.")
     res = False
-    if ((coord[0] < len(grille)) and (coord[0] >= 0)) and ((coord[1] < len(grille[0])) and (coord[1] >= 0)):
+    if ((coord[0] < getNbLignesGrilleDemineur(grille)) and (coord[0] >= 0)) and (
+            (coord[1] < getNbColonnesGrilleDemineur(grille)) and (coord[1] >= 0)):
         res = True
     return res
 
 
 def getCelluleGrilleDemineur(grille: list, coord: tuple) -> dict:
+    """
+    Cette fonction permet de retourner une cellule d'une grille grâce à une coordonnée
+
+    :param grille: liste correspondant à une grille
+    :param coord: couple correspondant à une coordonnée
+    :return: dictionnaire correspondant à une cellule
+    """
     if (not type_grille_demineur(grille)) or (not type_coordonnee(coord)):
         raise TypeError("getCelluleGrilleDemineur : un des paramètres n’est pas du bon type.")
     if not isCoordonneeCorrecte(grille, coord):
@@ -98,19 +132,50 @@ def getCelluleGrilleDemineur(grille: list, coord: tuple) -> dict:
 
 
 def getContenuGrilleDemineur(grille: list, coord: tuple) -> int:
+    """
+    Cette fonction permet de retourner le contenu d'une cellule grâce à une grille et une coordonnée
+
+    :param grille: liste correspondant à une grille
+    :param coord: couple correspondant à une coordonnée
+    :return: entier correspondant au contenu d'une cellule
+    """
     return getContenuCellule(getCelluleGrilleDemineur(grille, coord))
 
 
 def setContenuGrilleDemineur(grille: list, coord: tuple, contenu: int) -> None:
+    """
+    Cette fonction permet de modifier le contenu de la cellule grâce à une grille et une coordonnée
+
+    :param grille: liste correspondant à une grille
+    :param coord: couple correspondant à une coordonnée
+    :param contenu: entier correspondant au contenu de la cellule
+    :return: Rien
+    """
     setContenuCellule(getCelluleGrilleDemineur(grille, coord), contenu)
     return None
 
 
 def isVisibleGrilleDemineur(grille: list, coord: tuple) -> bool:
+    """
+    Cette fonction permet de vérifier si la visibilité de la cellule est correcte ou non grâce à une grille et une
+    coordonnée
+
+    :param grille: liste correspondant à une grille
+    :param coord: couple correspondant à une coordonnée
+    :return: `True` si la valeur de la clé const.VISIBLE est du bon type, `False` sinon.
+    """
     return isVisibleCellule(getCelluleGrilleDemineur(grille, coord))
 
 
 def setVisibleGrilleDemineur(grille: list, coord: tuple, visibilite: bool) -> None:
+    """
+    Cette fonction permet de modifier la visibilité de la cellule grâce à une grille et une coordonnée
+
+    :param grille: liste correspondant à une grille
+    :param coord: couple correspondant à une coordonnée
+    :param visibilite: booléen correspondant à la visibilité de la cellule
+    :return: Rien
+    """
     if type(visibilite) != bool:
         raise TypeError("setVisibleGrilleDemineur : Le troisième paramètre n’est pas un booléen.")
     setVisibleCellule(getCelluleGrilleDemineur(grille, coord), visibilite)
@@ -118,6 +183,13 @@ def setVisibleGrilleDemineur(grille: list, coord: tuple, visibilite: bool) -> No
 
 
 def contientMineGrilleDemineur(grille: list, coord: tuple) -> bool:
+    """
+    Cette fonction permet de vérifier si une cellule contient une mine grâce à une grille et une coordonnée
+
+    :param grille: liste correspondant à une grille
+    :param coord: couple correspondant à une coordonnée
+    :return: True si la cellule est une mine, False sinon
+    """
     res = False
     if getCelluleGrilleDemineur(grille, coord)[const.CONTENU] == const.ID_MINE:
         res = True
@@ -125,31 +197,47 @@ def contientMineGrilleDemineur(grille: list, coord: tuple) -> bool:
 
 
 def getCoordonneeVoisinsGrilleDemineur(grille: list, coord: tuple) -> list:
+    """
+    Cette fonction permet de retourner une liste constituée des coordonnées des cellules voisines d'une cellule grâce
+    à une grille et une coordonnée
+
+    :param grille: liste correspondant à une grille
+    :param coord: couple correspondant à une coordonnée
+    :return: liste constituée des coordonnées des cellules voisines
+    """
     if (not type_grille_demineur(grille)) or (not type_coordonnee(coord)):
         raise TypeError("getCoordonneeVoisinsGrilleDemineur : un des paramètres n’est pas du bon type.")
     if not isCoordonneeCorrecte(grille, coord):
         raise IndexError("getCoordonneeVoisinsGrilleDemineur : la coordonnée n’est pas dans la grille.")
     voisins = []
     for i in range(coord[0] - 1, coord[0] + 2):
-        if (i >= 0) and (i < len(grille)):
+        if (i >= 0) and (i < getNbLignesGrilleDemineur(grille)):
             for j in range(coord[1] - 1, coord[1] + 2):
-                if (j >= 0) and (j < len(grille[0])) and ((i, j) != coord):
+                if (j >= 0) and (j < getNbColonnesGrilleDemineur(grille)) and ((i, j) != coord):
                     voisins += [(i, j)]
     return voisins
 
 
 def placerMinesGrilleDemineur(grille: list, nb: int, coord: tuple) -> None:
-    if (nb < 0) or (nb > (len(grille) * len(grille[0])) - 1):
+    """
+    Cette fonction permet de placer aléatoirement `nb` mine(s) dans une grille
+
+    :param grille: liste correspondant à une grille
+    :param nb: entier correspondant au nombre de mines à placer dans la grille
+    :param coord: couple correspondant à une coordonnée
+    :return: Rien
+    """
+    if (nb < 0) or (nb > (getNbLignesGrilleDemineur(grille) * getNbColonnesGrilleDemineur(grille)) - 1):
         raise ValueError("placerMinesGrilleDemineur : Nombre de bombes à placer incorrect.")
     if not isCoordonneeCorrecte(grille, coord):
         raise IndexError("placerMinesGrilleDemineur : la coordonnée n’est pas dans la grille.")
     for i in range(nb):
-        x = randint(0, len(grille) - 1)
-        y = randint(0, len(grille[0]) - 1)
+        x = randint(0, getNbLignesGrilleDemineur(grille) - 1)
+        y = randint(0, getNbColonnesGrilleDemineur(grille) - 1)
         cellule = (x, y)
         while (cellule == coord) or (getContenuCellule(getCelluleGrilleDemineur(grille, cellule)) == const.ID_MINE):
-            x = randint(0, len(grille) - 1)
-            y = randint(0, len(grille[0]) - 1)
+            x = randint(0, getNbLignesGrilleDemineur(grille) - 1)
+            y = randint(0, getNbColonnesGrilleDemineur(grille) - 1)
             cellule = (x, y)
         setContenuCellule(getCelluleGrilleDemineur(grille, cellule), const.ID_MINE)
     compterMinesVoisinesGrilleDemineur(grille)
@@ -157,8 +245,14 @@ def placerMinesGrilleDemineur(grille: list, nb: int, coord: tuple) -> None:
 
 
 def compterMinesVoisinesGrilleDemineur(grille: list) -> None:
-    for i in range(len(grille)):
-        for j in range(len(grille[i])):
+    """
+    Cette fonction permet de calculer pour chaque cellule le nombre de mines parmi ses cellules voisines
+
+    :param grille: liste correspondant à une grille
+    :return: Rien
+    """
+    for i in range(getNbLignesGrilleDemineur(grille)):
+        for j in range(getNbColonnesGrilleDemineur(grille)):
             if getContenuCellule(getCelluleGrilleDemineur(grille, (i, j))) != const.ID_MINE:
                 coord = getCoordonneeVoisinsGrilleDemineur(grille, (i, j))
                 bombes = 0
@@ -170,33 +264,58 @@ def compterMinesVoisinesGrilleDemineur(grille: list) -> None:
 
 
 def getNbMinesGrilleDemineur(grille: list) -> int:
+    """
+    Cette fonction permet de calculer le nombre total de mines dans une grille
+
+    :param grille: liste correspondant à une grille
+    :return: entier correspondant au nombre de mines
+    """
     if not type_grille_demineur(grille):
         raise ValueError("getNbMinesGrilleDemineur : le paramètre n’est pas une grille.")
     bombes = 0
-    for i in range(len(grille)):
-        for j in range(len(grille[i])):
+    for i in range(getNbLignesGrilleDemineur(grille)):
+        for j in range(getNbColonnesGrilleDemineur(grille)):
             if getContenuCellule(getCelluleGrilleDemineur(grille, (i, j))) == const.ID_MINE:
                 bombes += 1
     return bombes
 
 
 def getAnnotationGrilleDemineur(grille: list, coord: tuple) -> str:
+    """
+    Cette fonction permet de retourner l'annotation d'une cellule grâce à une grille et une coordonnée
+
+    :param grille: liste correspondant à une grille
+    :param coord: couple correspondant à une coordonnée
+    :return: chaine de caractères correspondant à l'annotation de la cellule
+    """
     return getAnnotationCellule(getCelluleGrilleDemineur(grille, coord))
 
 
 def getMinesRestantesGrilleDemineur(grille: list) -> int:
+    """
+    Cette fonction permet de calculer le nombre de mines restantes dans une grille
+
+    :param grille: liste correspondant à une grille
+    :return: entier correspondant au nombre de mines
+    """
     nb = 0
-    for i in range(len(grille)):
-        for j in range(len(grille[i])):
+    for i in range(getNbLignesGrilleDemineur(grille)):
+        for j in range(getNbColonnesGrilleDemineur(grille)):
             if getAnnotationGrilleDemineur(grille, (i, j)) == const.FLAG:
                 nb += 1
     return getNbMinesGrilleDemineur(grille) - nb
 
 
 def gagneGrilleDemineur(grille: list) -> bool:
+    """
+    Cette fonction permet de vérifier si une partie est gagnée ou non
+
+    :param grille: liste correspondant à une grille
+    :return: True si la partie est gagnée, False sinon
+    """
     res = True
-    for i in range(len(grille)):
-        for j in range(len(grille[i])):
+    for i in range(getNbLignesGrilleDemineur(grille)):
+        for j in range(getNbColonnesGrilleDemineur(grille)):
             if (not contientMineGrilleDemineur(grille, (i, j)) and not isVisibleGrilleDemineur(grille, (i, j))) or (
                     (contientMineGrilleDemineur(grille, (i, j)) == True) and (isVisibleGrilleDemineur(grille, (i, j)
                                                                                                       ) == True)) or (
@@ -207,9 +326,15 @@ def gagneGrilleDemineur(grille: list) -> bool:
 
 
 def perduGrilleDemineur(grille: list):
+    """
+    Cette fonction permet de vérifier si une partie est perdue ou non
+
+    :param grille: liste correspondant à une grille
+    :return: True si la partie est perdue, False sinon
+    """
     res = False
-    for i in range(len(grille)):
-        for j in range(len(grille[i])):
+    for i in range(getNbLignesGrilleDemineur(grille)):
+        for j in range(getNbColonnesGrilleDemineur(grille)):
             if (contientMineGrilleDemineur(grille, (i, j)) == True) and (
                     isVisibleGrilleDemineur(grille, (i, j)) == True):
                 res = True
@@ -217,13 +342,26 @@ def perduGrilleDemineur(grille: list):
 
 
 def reinitialiserGrilleDemineur(grille: list) -> None:
-    for i in range(len(grille)):
-        for j in range(len(grille[i])):
+    """
+    Cette fonction permet de réinitialiser toutes les cellules d'une grille
+
+    :param grille: liste correspondant à une grille
+    :return: Rien
+    """
+    for i in range(getNbLignesGrilleDemineur(grille)):
+        for j in range(getNbColonnesGrilleDemineur(grille)):
             reinitialiserCellule(grille[i][j])
     return None
 
 
 def decouvrirGrilleDemineur(grille: list, coord: tuple) -> set:
+    """
+    Cette fonction permet de découvrir les cellules adjacentes à une cellule contenant 0 mine
+
+    :param grille: liste correspondant à une grille
+    :param coord: couple correspondant à une coordonnée
+    :return: ensemble constitué des coordonnées des cellules modifiées
+    """
     if isVisibleGrilleDemineur(grille, coord):
         return set()
     setVisibleGrilleDemineur(grille, coord, True)
@@ -241,6 +379,14 @@ def decouvrirGrilleDemineur(grille: list, coord: tuple) -> set:
 
 
 def simplifierGrilleDemineur(grille: list, coord: tuple) -> set:
+    """
+    Cette fonction permet de découvrir les cellules voisines lorsque le nombre de drapeaux correspond au nombre de
+    mines dans le contenu de la cellule
+
+    :param grille: liste correspondant à une grille
+    :param coord: couple correspondant à une coordonnée
+    :return: ensemble constitué des coordonnées des cellules modifiées
+    """
     if not isVisibleGrilleDemineur(grille, coord):
         return set()
     voisins = getCoordonneeVoisinsGrilleDemineur(grille, coord)
@@ -261,6 +407,14 @@ def simplifierGrilleDemineur(grille: list, coord: tuple) -> set:
 
 
 def ajouterFlagsGrilleDemineur(grille: list, coord: tuple) -> set:
+    """
+    Cette fonction permet de découvrir les cellules voisines lorsque le nombre de cases non découvertes correspond au
+    nombre de mines dans le contenu de la cellule
+
+    :param grille: liste correspondant à une grille
+    :param coord: couple correspondant à une coordonnée
+    :return: ensemble constitué des coordonnées des cellules modifiées
+    """
     if not isVisibleGrilleDemineur(grille, coord):
         return set()
     cellnondec = 0
@@ -280,16 +434,23 @@ def ajouterFlagsGrilleDemineur(grille: list, coord: tuple) -> set:
 
 
 def simplifierToutGrilleDemineur(grille: list) -> tuple:
+    """
+    Cette fonction permet de découvrir les cellules voisines lorsque le nombre de cases non découvertes correspond au
+    nombre de mines dans le contenu de la cellule
+
+    :param grille: liste correspondant à une grille
+    :return: couple constitué d'un ensemble correspondant aux coordonnées des cellules modifiées par la première
+    fonction et d'un deuxième ensemble correspondant aux coordonnées des cellules modifiées par la deuxième fonction
+    """
     simplifier = set()
     ajouter = set()
-    for i in range(len(grille)):
-        for j in range(len(grille[i])):
+    for i in range(getNbLignesGrilleDemineur(grille)):
+        for j in range(getNbColonnesGrilleDemineur(grille)):
             grille1 = grille.copy()
             simplifierGrilleDemineur(grille, (i, j))
             grille2 = grille.copy()
             if grille1 != grille2:
                 simplifier.add((i, j))
-
             grille1 = grille.copy()
             ajouterFlagsGrilleDemineur(grille, (i, j))
             grille2 = grille.copy()
